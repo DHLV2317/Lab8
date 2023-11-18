@@ -1,6 +1,5 @@
 package com.example.lab8.Beans;
 
-import java.math.BigDecimal;
 
 public class Usuario {
     private int usuarioId;
@@ -9,6 +8,9 @@ public class Usuario {
     private String correo;
     private String username;
 
+    public Usuario(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
     public Usuario(){
 
     }

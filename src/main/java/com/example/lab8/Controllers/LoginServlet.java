@@ -27,8 +27,8 @@ public class LoginServlet extends HttpServlet {
             System.out.println("usuario y password válidos");
             Usuario usuario = UsuarioDao.obtenerUsuario(username);
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("usuarioLogueado",username);
-            response.sendRedirect(request.getContextPath());
+            httpSession.setAttribute("usuarioLogueado",usuario);
+            response.sendRedirect(request.getContextPath() + "/PersonasServlet");
         }else{
             System.out.println("usuario o password incorrectos");
             request.setAttribute("err","Usuario o password incorrectos");

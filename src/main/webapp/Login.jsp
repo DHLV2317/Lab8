@@ -28,6 +28,10 @@
         <form method="post" action="<%=request.getContextPath()%>/LoginServlet">
             <h1>Inicia Sesión</h1>
             <span>Ingresa tu usuario y contraseña</span>
+            <% if (request.getAttribute("err") != null) {%>
+            <div class="alert alert-danger" role="alert"><%=request.getAttribute("err")%>
+            </div>
+            <% } %>
             <input type="text" placeholder="Usuario" name="username">
             <input type="password" placeholder="Contraseña" name="password">
             <button>Ingresar</button>
