@@ -25,11 +25,11 @@
         </form>
     </div>
     <div class="form-container sign-in">
-        <form>
+        <form method="post" action="<%=request.getContextPath()%>/LoginServlet">
             <h1>Inicia Sesión</h1>
             <span>Ingresa tu usuario y contraseña</span>
-            <input type="text" placeholder="Usuario">
-            <input type="password" placeholder="Contraseña">
+            <input type="text" placeholder="Usuario" name="username">
+            <input type="password" placeholder="Contraseña" name="password">
             <button>Ingresar</button>
         </form>
     </div>
