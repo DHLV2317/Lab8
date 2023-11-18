@@ -7,71 +7,45 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema RootsGame
 -- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema rootsgame
+-- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema RootsGame
+-- Schema rootsgame
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `RootsGame` DEFAULT CHARACTER SET utf8 ;
-USE `RootsGame` ;
+CREATE SCHEMA IF NOT EXISTS `rootsgame` DEFAULT CHARACTER SET utf8 ;
+USE `rootsgame` ;
 
 -- -----------------------------------------------------
--- Table `RootsGame`.`usuario`
+-- Table `rootsgame`.`estadocivilizacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`usuario` (
-  `idusuario` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `edad` VARCHAR(45) NOT NULL,
-  `correo` VARCHAR(45) NOT NULL,
-  `nickname` VARCHAR(45) NOT NULL,
-  `contrasena` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idusuario`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RootsGame`.`Recursos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`Recursos` (
-  `idRecursos` INT NOT NULL,
-  `hora` VARCHAR(45) NOT NULL,
-  `dia` VARCHAR(45) NOT NULL,
-  `produccionT` VARCHAR(45) NOT NULL,
-  `poblacion` VARCHAR(45) NULL,
-  `usuario_idusuario` INT NOT NULL,
-  PRIMARY KEY (`idRecursos`),
-  INDEX `fk_Recursos_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Recursos_usuario1`
-    FOREIGN KEY (`usuario_idusuario`)
-    REFERENCES `RootsGame`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RootsGame`.`profesion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`profesion` (
-  `idprofesion` INT NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idprofesion`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RootsGame`.`estadoCivilizacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`estadoCivilizacion` (
+CREATE TABLE IF NOT EXISTS `rootsgame`.`estadocivilizacion` (
   `idestadoCivilizacion` INT NOT NULL,
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idestadoCivilizacion`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `RootsGame`.`civilizacion`
+-- Table `rootsgame`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`civilizacion` (
+CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
+  `id_usuario` INT NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `edad` INT NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`civilizacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`civilizacion` (
   `idcivilizacion` INT NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
   `guerraGanada` VARCHAR(45) NOT NULL,
@@ -83,21 +57,29 @@ CREATE TABLE IF NOT EXISTS `RootsGame`.`civilizacion` (
   INDEX `fk_civilizacion_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_civilizacion_estadoCivilizacion1`
     FOREIGN KEY (`estadoCivilizacion_idestadoCivilizacion`)
-    REFERENCES `RootsGame`.`estadoCivilizacion` (`idestadoCivilizacion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rootsgame`.`estadocivilizacion` (`idestadoCivilizacion`),
   CONSTRAINT `fk_civilizacion_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
-    REFERENCES `RootsGame`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `rootsgame`.`usuario` (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `RootsGame`.`personas`
+-- Table `rootsgame`.`profesion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RootsGame`.`personas` (
+CREATE TABLE IF NOT EXISTS `rootsgame`.`profesion` (
+  `idprofesion` INT NOT NULL,
+  `descripcion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idprofesion`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`personas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`personas` (
   `idpersonas` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `genero` VARCHAR(45) NOT NULL,
@@ -113,15 +95,47 @@ CREATE TABLE IF NOT EXISTS `RootsGame`.`personas` (
   INDEX `fk_personas_civilizacion1_idx` (`civilizacion_idcivilizacion` ASC) VISIBLE,
   CONSTRAINT `fk_gestion_personas_profesion1`
     FOREIGN KEY (`profesion_idprofesion`)
-    REFERENCES `RootsGame`.`profesion` (`idprofesion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rootsgame`.`profesion` (`idprofesion`),
   CONSTRAINT `fk_personas_civilizacion1`
     FOREIGN KEY (`civilizacion_idcivilizacion`)
-    REFERENCES `RootsGame`.`civilizacion` (`idcivilizacion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `rootsgame`.`civilizacion` (`idcivilizacion`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`recursos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`recursos` (
+  `idRecursos` INT NOT NULL,
+  `hora` VARCHAR(45) NOT NULL,
+  `dia` VARCHAR(45) NOT NULL,
+  `produccionT` VARCHAR(45) NOT NULL,
+  `poblacion` VARCHAR(45) NULL DEFAULT NULL,
+  `usuario_idusuario` INT NOT NULL,
+  PRIMARY KEY (`idRecursos`),
+  INDEX `fk_Recursos_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Recursos_usuario1`
+    FOREIGN KEY (`usuario_idusuario`)
+    REFERENCES `rootsgame`.`usuario` (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`usuario_credenciales`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario_credenciales` (
+  `id_usuario` INT NOT NULL,
+  `username` VARCHAR(25) NOT NULL,
+  `password` VARCHAR(25) NOT NULL,
+  `password_hashed` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  CONSTRAINT `fk_table1_usuario1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `rootsgame`.`usuario` (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
