@@ -41,8 +41,9 @@
                 <button class="hidden" id="login">Ingresar</button>
             </div>
             <div class="toggle-panel toggle-right">
-                <h1>Bienvenido, jugador</h1>
-                <p>Regístrese con sus datos personales para utilizar todas las funciones del sitio</p>
+                <h1>Bienvenido</h1>
+                <p style="text-align:justify">¿Te imaginas cómo sería tener tu propia civilización, dirigirla y dominar el mundo?     </p>
+                <p style="margin-top: 0px">Hazlo realidad, organiza la población, administra los recursos y batalla por el dominio del mundo. Sé el cambio que quieres ver en el mundo. Tu visión, tu pasión y tu acción son las claves para crear una civilización próspera y fuerte.</p>
                 <button class="hidden" id="register">Regístrate</button>
             </div>
         </div>
