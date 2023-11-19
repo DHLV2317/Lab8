@@ -63,27 +63,41 @@ public class LoginServlet extends HttpServlet {
     }
 
     public Usuario parseUsuario(HttpServletRequest request) {
-
         Usuario usuario = new Usuario();
-
-
         String nombre = request.getParameter("nombre");
-        int edad = Integer.parseInt(request.getParameter("edad"));
-        String correo = request.getParameter("email");
         String username = request.getParameter("usuarioNuevo");
+        String correo = request.getParameter("email");
+        String edadStr = request.getParameter("edad");
 
         try {
+            int edad = Integer.parseInt(edadStr);
 
+            // Validations
+            if (!Character.isLetter(nombre.charAt(0)) || !Character.isLetter(username.charAt(0))) {
+                throw new IllegalArgumentException("El nombre y el usuario deben empezar con letras.");
+            }
+
+            if (edad <= 12) {
+                throw new IllegalArgumentException("El usuario debe ser mayor de 12 años.");
+            }
+
+            // Other validations can be added
+
+            // Set user properties if validations pass
             usuario.setNombre(nombre);
-            usuario.setEdad(edad);
-            usuario.setCorreo(correo);
             usuario.setUsername(username);
+            usuario.setCorreo(correo);
+            usuario.setEdad(edad);
 
         } catch (NumberFormatException e) {
-
+            throw new IllegalArgumentException("La edad debe ser un número válido.");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
+
         return usuario;
     }
+
 
 
 
