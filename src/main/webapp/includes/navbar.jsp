@@ -1,3 +1,4 @@
+<%@ page import="com.example.lab8.Beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String currentPage = request.getParameter("currentPage"); %>
 <jsp:useBean id="usuarioLogueado" scope="session" type="Usuario" class="com.example.lab8.Beans.Usuario" />

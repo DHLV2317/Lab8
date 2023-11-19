@@ -12,11 +12,9 @@
 </head>
 <body>
 <div class="container">
-    <!--
     <jsp:include page="../includes/navbar.jsp">
         <jsp:param name="currentPage" value="job"/>
     </jsp:include>
-    -->
     <div class="row mb-5 mt-4">
         <div class="col-md-7">
             <h1>Personas de la civilización</h1>
