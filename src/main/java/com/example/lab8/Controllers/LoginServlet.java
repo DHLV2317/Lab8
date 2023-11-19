@@ -12,7 +12,18 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("Login.jsp").forward(request,response);
+        HttpSession httpSession = request.getSession();
+        Usuario usuarioLogueado = (Usuario) httpSession.getAttribute("usuarioLogueado");
+
+        if(usuarioLogueado != null && usuarioLogueado.getUsuarioId() > 0){
+
+            if(request.getParameter("a") != null){//logout
+                httpSession.invalidate();
+            }
+            response.sendRedirect(request.getContextPath());
+        }else{
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -25,14 +36,14 @@ public class LoginServlet extends HttpServlet {
 
         if(usuarioDao.validarUsuarioPasswordHashed(username,password)){
             System.out.println("usuario y password válidos");
-            Usuario usuario = UsuarioDao.obtenerUsuario(username);
+            Usuario usuario = usuarioDao.obtenerUsuario(username);
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("usuarioLogueado",usuario);
             response.sendRedirect(request.getContextPath() + "/PersonasServlet");
         }else{
             System.out.println("usuario o password incorrectos");
             request.setAttribute("err","Usuario o password incorrectos");
-            request.getRequestDispatcher("loginForm.jsp").forward(request,response);
+            request.getRequestDispatcher("Login.jsp").forward(request,response);
         }
     }
 }

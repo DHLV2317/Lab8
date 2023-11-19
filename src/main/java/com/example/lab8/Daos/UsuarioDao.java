@@ -79,11 +79,8 @@ public class UsuarioDao extends DaoBase{
         Usuario usuario = null;
 
         /*corregir select*/
-        String sql = "SELECT * FROM employees e \n"
-                + "left join jobs j ON (j.job_id = e.job_id) \n"
-                + "left join departments d ON (d.department_id = e.department_id)\n"
-                + "left  join employees m ON (e.manager_id = m.employee_id)\n"
-                + "WHERE e.email = ?";
+        String sql = "SELECT * FROM usuario u \n"
+                + "WHERE u.username = ?";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
