@@ -1,11 +1,13 @@
 package com.example.lab8.Daos;
 
 import com.example.lab8.Beans.Usuario;
+import com.example.lab8.Beans.UsuarioCredenciales;
+import com.example.lab8.Daos.DaoBase;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UsuarioDao extends DaoBase{
+public class UsuarioDao extends DaoBase {
 
     private void setUsuarioParams(PreparedStatement pstmt, Usuario usuario) throws SQLException {
         pstmt.setString(1, usuario.getNombre());
@@ -26,20 +28,20 @@ public class UsuarioDao extends DaoBase{
 
     }
 
-    public boolean validarUsuarioPassword(String username, String password){
+    public boolean validarUsuarioPassword(String username, String password) {
 
         String sql = "SELECT * FROM usuario_credenciales where username = ? and password = ?";
 
         boolean exito = false;
 
-        try(Connection connection = getConection();
-            PreparedStatement pstmt = connection.prepareStatement(sql)){
+        try (Connection connection = getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,username);
-            pstmt.setString(2,password);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
-            try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
                     exito = true;
                 }
             }
@@ -50,20 +52,20 @@ public class UsuarioDao extends DaoBase{
         return exito;
     }
 
-    public boolean validarUsuarioPasswordHashed(String username, String password){
+    public boolean validarUsuarioPasswordHashed(String username, String password) {
 
         String sql = "SELECT * FROM usuario_credenciales where username = ? and password_hashed = sha2(?,256)";
 
         boolean exito = false;
 
-        try(Connection connection = getConection();
-            PreparedStatement pstmt = connection.prepareStatement(sql)){
+        try (Connection connection = getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,username);
-            pstmt.setString(2,password);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
-            try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
                     exito = true;
                 }
             }
@@ -100,7 +102,54 @@ public class UsuarioDao extends DaoBase{
         return usuario;
     }
 
+    public void guardarUsuario(Usuario usuario) {
+
+        String sql = "INSERT INTO `rootsgame`.`usuario` (`nombre`, `edad`, `correo`, `username`)\n" +
+                "VALUES (?,?,?,?);";
+
+        try (Connection conn = this.getConection();
+
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+             pstmt.setString(1, usuario.getNombre());
+             pstmt.setInt(2,usuario.getEdad());
+             pstmt.setString(3,usuario.getCorreo());
+             pstmt.setString(4,usuario.getUsername());
+
+             pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void guardarContrasena(String contrasena, String username, Usuario usuario3){
+
+
+        String sql = "INSERT INTO usuario_credenciales(`id_usuario`, `username`, `password_hashed`)\n" +
+                "VALUES (?,?,SHA2(?,256));";
+
+        try (Connection conn = this.getConection();
+
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuario3.getUsuarioId());
+            pstmt.setString(2,username);
+            pstmt.setString(3,contrasena);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
+
+
+
+
+
 
 
 
