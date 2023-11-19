@@ -10,6 +10,15 @@ public class Personas {
     private String fuerza;
     private String produccion;
     private Profesion profesion;
+    private Civilizacion civilizacion;
+
+    public Civilizacion getCivilizacion() {
+        return civilizacion;
+    }
+
+    public void setCivilizacion(Civilizacion civilizacion) {
+        this.civilizacion = civilizacion;
+    }
 
     public int getPersonaId() {
         return personaId;
