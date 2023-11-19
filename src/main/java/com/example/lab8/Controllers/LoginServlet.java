@@ -56,17 +56,14 @@ public class LoginServlet extends HttpServlet {
                     String username2 = request.getParameter("usuarioNuevo");
                     String contra = request.getParameter("contra");
 
-                    // Perform additional validations
                     if (!usuarioDao.isUsernameUnique(username2)) {
                         throw new IllegalArgumentException("El nombre de usuario ya está en uso.");
                     }
 
-                    // Password validation
                     if (!isPasswordValid(contra)) {
                         throw new IllegalArgumentException("La contraseña debe tener al menos una mayúscula, un número y un carácter especial.");
                     }
 
-                    // If all validations pass, proceed with registration
                     usuarioDao.guardarUsuario(usuario);
                     Usuario usuario3 = usuarioDao.obtenerUsuario(username2);
                     usuarioDao.guardarContrasena(contra, username2, usuario3);
@@ -100,7 +97,7 @@ public class LoginServlet extends HttpServlet {
         try {
             int edad = Integer.parseInt(edadStr);
 
-            // Validations
+
             if (!Character.isLetter(nombre.charAt(0)) || !Character.isLetter(username.charAt(0))) {
                 throw new IllegalArgumentException("El nombre y el usuario deben empezar con letras.");
             }
@@ -109,9 +106,6 @@ public class LoginServlet extends HttpServlet {
                 throw new IllegalArgumentException("El usuario debe ser mayor de 12 años.");
             }
 
-            // Other validations can be added
-
-            // Set user properties if validations pass
             usuario.setNombre(nombre);
             usuario.setUsername(username);
             usuario.setCorreo(correo);

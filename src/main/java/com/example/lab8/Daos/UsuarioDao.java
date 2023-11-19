@@ -158,13 +158,6 @@ public class UsuarioDao extends DaoBase {
             throw new RuntimeException(e);
         }
     }
-
-
-    public boolean isPasswordValid(String password) {
-        // Password should have at least one uppercase letter, one digit, and one special character
-        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z\\d@#$%^&+=!]).{8,}$";
-        return password.matches(passwordRegex);
-    }
 }
 
 
