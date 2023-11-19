@@ -77,12 +77,9 @@ public class UsuarioDao extends DaoBase {
     }
 
     public Usuario obtenerUsuario(String username) {
-
         Usuario usuario = null;
 
-        /*corregir select*/
-        String sql = "SELECT * FROM usuario u \n"
-                + "WHERE u.username = ?";
+        String sql = "SELECT * FROM usuario WHERE username = ? ORDER BY id_usuario DESC LIMIT 1";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
