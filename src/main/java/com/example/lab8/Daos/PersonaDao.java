@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PersonaDao extends DaoBase{
-    public Personas obtenerPersona(String idPersona){
+    public Personas obtenerPersona(int idpersonas){
 
         Personas p = new Personas();
         ProfesionDao profesionDao = new ProfesionDao();
@@ -20,12 +20,12 @@ public class PersonaDao extends DaoBase{
         try (Connection conn = getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1,idPersona);
+            pstmt.setInt(1,idpersonas);
 
             try(ResultSet rs = pstmt.executeQuery()) {
 
                 if (rs.next()) {
-                    p.setPersonaId(rs.getInt("p.idPersona"));
+                    p.setIdpersonas(rs.getInt("p.idPersona"));
                     p.setNombre(rs.getString("p.nombre"));
                     p.setGenero(rs.getString("p.genero"));
                     p.setAlimentacion(rs.getInt("p.alimentacion"));

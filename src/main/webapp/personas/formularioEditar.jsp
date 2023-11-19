@@ -18,7 +18,7 @@
             <h1 class='mb-3'>Editar persona</h1>
             <hr>
             <form method="POST" action="EmployeeServlet">
-                <input type="hidden" name="employee_id" value="<%= persona.getPersonaId()%>"/>
+                <input type="hidden" name="employee_id" value="<%= persona.getIdpersonas()%>"/>
                 <div class="mb-3">
                     <label class="form-label" for="first_name">Nombre</label>
                     <input type="text" class="form-control form-control-sm" id="first_name" name="first_name"

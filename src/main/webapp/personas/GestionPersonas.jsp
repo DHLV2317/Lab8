@@ -75,14 +75,14 @@
             </td>
             <% if(usuarioLogueado != null && usuarioLogueado.getUsuarioId() > 0) {%>
             <td>
-                <a href="<%=request.getContextPath()%>/PersonasServlet?action=editar&id=<%= p.getPersonaId()%>"
+                <a href="<%=request.getContextPath()%>/PersonasServlet?action=editar&id=<%= p.getIdpersonas()%>"
                    type="button" class="btn btn-primary">
                     <i class="bi bi-pencil-square"></i>
                 </a>
             </td>
             <td>
                 <a onclick="return confirm('¿Estas seguro de borrar?');"
-                   href="<%=request.getContextPath()%>/PersonasServlet?action=borrar&id=<%= p.getPersonaId()%>"
+                   href="<%=request.getContextPath()%>/PersonasServlet?action=borrar&id=<%= p.getIdpersonas()%>"
                    type="button" class="btn btn-danger">
                     <i class="bi bi-trash"></i>
                 </a>

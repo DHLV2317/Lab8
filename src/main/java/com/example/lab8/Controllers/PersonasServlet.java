@@ -38,15 +38,15 @@ public class PersonasServlet extends HttpServlet {
 
                 if(usuario != null && usuario.getUsuarioId() > 0) {
                     if (request.getParameter("id") != null) {
-                        String personaIdString = request.getParameter("id");
-                        int personaId = 0;
+                        String idpersonasString = request.getParameter("id");
+                        int idpersonas = 0;
                         try {
-                            personaId = Integer.parseInt(personaIdString);
+                            idpersonas = Integer.parseInt(idpersonasString);
                         } catch (NumberFormatException ex) {
                             response.sendRedirect("PersonasServlet");
                         }
 
-                        Personas per = personaDao.obtenerPersonas(personaId);
+                        Personas per = personaDao.obtenerPersona(idpersonas);
 
                         if (per != null) {
                             request.setAttribute("persona", per);
@@ -67,21 +67,21 @@ public class PersonasServlet extends HttpServlet {
 
             case "borrar":
                 if (request.getParameter("id") != null) {
-                    String personaIdString = request.getParameter("id");
-                    int personaId = 0;
+                    String idpersonasString = request.getParameter("id");
+                    int idpersonas = 0;
                     try {
-                        personaId = Integer.parseInt(personaIdString);
+                        idpersonas = Integer.parseInt(idpersonasString);
                     } catch (NumberFormatException ex) {
                         response.sendRedirect("PersonasServlet?err=Error al exiliar a la persona");
                     }
 
                     /* Crear el método obtenerPersonas */
-                    Personas per = personaDao.obtenerPersona(personaId);
+                    Personas per = personaDao.obtenerPersona(idpersonas);
 
                     if (per != null) {
                         try {
                             /* Hacer el Dao */
-                            personaDao.borrarPersona(personaId);
+                            personaDao.borrarPersona(idpersonas);
                             response.sendRedirect("PersonasServlet?msg=Persona exiliada exitosamente");
                         } catch (SQLException e) {
                             response.sendRedirect("PersonasServlet?err=Error al exiliar a la persona");

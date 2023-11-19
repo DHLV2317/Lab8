@@ -1,7 +1,7 @@
 package com.example.lab8.Beans;
 
 public class Personas {
-    private int personaId;
+    private int idpersonas;
     private String nombre;
     private String genero;
     private int alimentacion;
@@ -20,12 +20,12 @@ public class Personas {
         this.civilizacion = civilizacion;
     }
 
-    public int getPersonaId() {
-        return personaId;
+    public int getIdpersonas() {
+        return idpersonas;
     }
 
-    public void setPersonaId(int personaId) {
-        this.personaId = personaId;
+    public void setIdpersonas(int idpersonas) {
+        this.idpersonas = idpersonas;
     }
 
     public String getNombre() {
