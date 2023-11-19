@@ -5,7 +5,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema RootsGame
+-- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 -- Schema rootsgame
@@ -15,6 +15,36 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema rootsgame
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `rootsgame` DEFAULT CHARACTER SET utf8 ;
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
+  `id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `edad` INT NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
+  `id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `edad` INT NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
 USE `rootsgame` ;
 
 -- -----------------------------------------------------
@@ -24,20 +54,6 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`estadocivilizacion` (
   `idestadoCivilizacion` INT NOT NULL,
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idestadoCivilizacion`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `rootsgame`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
-  `id_usuario` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `edad` INT NOT NULL,
-  `correo` VARCHAR(45) NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -54,11 +70,11 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`civilizacion` (
   `usuario_idusuario` INT NOT NULL,
   PRIMARY KEY (`idcivilizacion`),
   INDEX `fk_civilizacion_estadoCivilizacion1_idx` (`estadoCivilizacion_idestadoCivilizacion` ASC) VISIBLE,
-  INDEX `fk_civilizacion_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
+  INDEX `fk_civilizacion_usuario_idx` (`usuario_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_civilizacion_estadoCivilizacion1`
     FOREIGN KEY (`estadoCivilizacion_idestadoCivilizacion`)
     REFERENCES `rootsgame`.`estadocivilizacion` (`idestadoCivilizacion`),
-  CONSTRAINT `fk_civilizacion_usuario1`
+  CONSTRAINT `fk_civilizacion_usuario`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `rootsgame`.`usuario` (`id_usuario`))
 ENGINE = InnoDB
@@ -83,10 +99,10 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`personas` (
   `idpersonas` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `genero` VARCHAR(45) NOT NULL,
-  `alimentacion` VARCHAR(45) NOT NULL,
-  `moral` VARCHAR(45) NOT NULL,
+  `alimentacion` INT NOT NULL,
+  `moral` INT NOT NULL,
   `tiempo` VARCHAR(45) NOT NULL,
-  `fuerza` VARCHAR(45) NOT NULL,
+  `fuerza` VARCHAR(45) NULL,
   `produccion` VARCHAR(45) NOT NULL,
   `profesion_idprofesion` INT NOT NULL,
   `civilizacion_idcivilizacion` INT NOT NULL,
@@ -114,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`recursos` (
   `poblacion` VARCHAR(45) NULL DEFAULT NULL,
   `usuario_idusuario` INT NOT NULL,
   PRIMARY KEY (`idRecursos`),
-  INDEX `fk_Recursos_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Recursos_usuario1`
+  INDEX `fk_recursos_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_recursos_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `rootsgame`.`usuario` (`id_usuario`))
 ENGINE = InnoDB
@@ -127,8 +143,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario_credenciales` (
   `id_usuario` INT NOT NULL,
-  `username` VARCHAR(25) NOT NULL,
-  `password` VARCHAR(25) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `password_hashed` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   CONSTRAINT `fk_table1_usuario1`
