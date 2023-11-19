@@ -4,8 +4,8 @@ public class Personas {
     private int personaId;
     private String nombre;
     private String genero;
-    private String alimentacion;
-    private String moral;
+    private int alimentacion;
+    private int moral;
     private String tiempo;
     private String fuerza;
     private String produccion;
@@ -35,19 +35,19 @@ public class Personas {
         this.genero = genero;
     }
 
-    public String getAlimentacion() {
+    public int getAlimentacion() {
         return alimentacion;
     }
 
-    public void setAlimentacion(String alimentacion) {
+    public void setAlimentacion(int alimentacion) {
         this.alimentacion = alimentacion;
     }
 
-    public String getMoral() {
+    public int getMoral() {
         return moral;
     }
 
-    public void setMoral(String moral) {
+    public void setMoral(int moral) {
         this.moral = moral;
     }
 
@@ -82,14 +82,4 @@ public class Personas {
     public void setProfesion(Profesion profesion) {
         this.profesion = profesion;
     }
-
-    public Civilizacion getCivilizacion() {
-        return civilizacion;
-    }
-
-    public void setCivilizacion(Civilizacion civilizacion) {
-        this.civilizacion = civilizacion;
-    }
-
-    private Civilizacion civilizacion;
 }
