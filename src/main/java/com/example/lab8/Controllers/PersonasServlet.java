@@ -8,6 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 @WebServlet(name = "PersonasServlet", value = "/PersonasServlet")
@@ -21,7 +22,7 @@ public class PersonasServlet extends HttpServlet {
         switch (action) {
             case "lista":
                 /* Tener el Dao listarPersonas */
-                /*request.setAttribute("listaPersonas", personaDao.listarPersonas());*/
+                request.setAttribute("listaPersonas", personaDao.listarPersonas());
                 view = request.getRequestDispatcher("personas/GestionPersonas.jsp");
                 view.forward(request, response);
                 break;
@@ -88,17 +89,27 @@ public class PersonasServlet extends HttpServlet {
                         }
                     }
                 } else {
-                    response.sendRedirect("EmployeeServlet?err=Error al borrar el empleado");
+                    response.sendRedirect("PersonasServlet?err=Error al borrar el empleado");
                 }
                 break;
             default:
-                response.sendRedirect("EmployeeServlet");
+                response.sendRedirect("PersonasServlet");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String action = request.getParameter("action") == null ? "guardar" : request.getParameter("action");
+        PersonaDao personaDao = new PersonaDao();
+
+        switch (action) {
+            case "guardar":
+                Personas p = new Personas();
+
+                break;
+
+        }
     }
 }
 
