@@ -141,6 +141,30 @@ public class UsuarioDao extends DaoBase {
         }
 
     }
+
+
+    public boolean isUsernameUnique(String username) {
+        String sql = "SELECT 1 FROM usuario WHERE username = ? LIMIT 1";
+
+        try (Connection connection = getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return !rs.next(); // Return true if there is no matching username
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public boolean isPasswordValid(String password) {
+        // Password should have at least one uppercase letter, one digit, and one special character
+        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z\\d@#$%^&+=!]).{8,}$";
+        return password.matches(passwordRegex);
+    }
 }
 
 

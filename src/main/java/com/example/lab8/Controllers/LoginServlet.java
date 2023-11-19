@@ -51,15 +51,43 @@ public class LoginServlet extends HttpServlet {
 
                 break;
             case "registrar":
-                Usuario usuario = parseUsuario(request);
-                String username2 = request.getParameter("usuarioNuevo");
-                String contra = request.getParameter("contra");
-                usuarioDao.guardarUsuario(usuario);
-                Usuario usuario3 =usuarioDao.obtenerUsuario(username2);
-                usuarioDao.guardarContrasena(contra,username2,usuario3);
-                response.sendRedirect(request.getContextPath()+ "/LoginServlet");
+                try {
+                    Usuario usuario = parseUsuario(request);
+                    String username2 = request.getParameter("usuarioNuevo");
+                    String contra = request.getParameter("contra");
+
+                    // Perform additional validations
+                    if (!usuarioDao.isUsernameUnique(username2)) {
+                        throw new IllegalArgumentException("El nombre de usuario ya está en uso.");
+                    }
+
+                    // Password validation
+                    if (!isPasswordValid(contra)) {
+                        throw new IllegalArgumentException("La contraseña debe tener al menos una mayúscula, un número y un carácter especial.");
+                    }
+
+                    // If all validations pass, proceed with registration
+                    usuarioDao.guardarUsuario(usuario);
+                    Usuario usuario3 = usuarioDao.obtenerUsuario(username2);
+                    usuarioDao.guardarContrasena(contra, username2, usuario3);
+
+                    response.sendRedirect(request.getContextPath() + "/LoginServlet");
+
+                } catch (IllegalArgumentException e) {
+                    // Handle validation errors
+                    request.setAttribute("err", e.getMessage());
+                    request.getRequestDispatcher("Login.jsp").forward(request, response);
+                }
+                break;
 
         }
+    }
+
+
+    private boolean isPasswordValid(String password) {
+        // Password should have at least one uppercase letter, one digit, and one special character
+        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z\\d@#$%^&+=!]).{8,}$";
+        return password.matches(passwordRegex);
     }
 
     public Usuario parseUsuario(HttpServletRequest request) {
