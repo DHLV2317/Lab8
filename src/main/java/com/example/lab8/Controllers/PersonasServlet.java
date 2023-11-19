@@ -8,7 +8,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 @WebServlet(name = "PersonasServlet", value = "/PersonasServlet")
