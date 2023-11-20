@@ -7,7 +7,7 @@
 <head>
     <title>Gestión Personas</title>
     <!-- icono de la página -->
-    <link rel="icon" href="../images/icono.png" />
+    <link rel="icon" href="images/icono.png" />
     <jsp:include page="../includes/headCss.jsp"></jsp:include>
 </head>
 <body>
