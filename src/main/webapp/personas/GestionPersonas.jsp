@@ -20,7 +20,7 @@
             <h1>Personas de la civilización</h1>
         </div>
         <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
-            <a href="<%= request.getContextPath()%>/PersonasServlet?action=agregar" class="btn btn-succes">Crear
+            <a href="<%= request.getContextPath()%>/PersonasServlet?action=agregar" class="btn btn-success">Crear
                 nueva persona</a>
         </div>
     </div>

@@ -26,7 +26,7 @@
                 </div>
 
                 <a href="<%= request.getContextPath()%>/PersonasServlet" class="btn btn-danger">Cancelar</a>
-                <input type="submit" value="Guardar" class="btn btn-succes"/>
+                <input type="submit" value="Guardar" class="btn btn-success"/>
             </form>
         </div>
         <div class="col-md-3"></div>
