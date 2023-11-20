@@ -18,7 +18,24 @@
                        Personas
                     </a>
                 </li>
-                <!-- Luego colocar las demás opciones -->
+                <li class="nav-item">
+                    <a class="nav-link <%=currentPage.equals("rec") ? "active" : ""%>"
+                       href="<%=request.getContextPath()%>/RecursosServlet">
+                        Recursos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%=currentPage.equals("gue") ? "active" : ""%>"
+                       href="<%=request.getContextPath()%>/GuerraServlet">
+                        Guerra
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%=currentPage.equals("lead") ? "active" : ""%>"
+                       href="<%=request.getContextPath()%>/LeaderboardServlet">
+                        Leaderboard
+                    </a>
+                </li>
                 <li class="nav-item">
                     <% if(usuarioLogueado.getUsuarioId() != 0){ %>
                     <a class="nav-link disabled"><%=usuarioLogueado.getUsername()%></a>

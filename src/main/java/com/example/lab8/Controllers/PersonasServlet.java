@@ -20,14 +20,12 @@ public class PersonasServlet extends HttpServlet {
 
         switch (action) {
             case "lista":
-                /* Tener el Dao listarPersonas */
+
                 request.setAttribute("listaPersonas", personaDao.listarPersonas());
                 view = request.getRequestDispatcher("personas/GestionPersonas.jsp");
                 view.forward(request, response);
                 break;
             case "agregar":
-                /*Revisar jeje*/
-
 
                 view = request.getRequestDispatcher("personas/formularioNuevo.jsp");
                 view.forward(request, response);
@@ -75,13 +73,11 @@ public class PersonasServlet extends HttpServlet {
                         response.sendRedirect("PersonasServlet?err=Error al exiliar a la persona");
                     }
 
-                    /* Crear el método obtenerPersonas */
                     Personas per = personaDao.obtenerPersona(idpersonas);
 
                     if (per != null) {
                         try {
-                            /* Hacer el Dao */
-                            personaDao.borrarPersona(idpersonas);
+                           personaDao.borrarPersona(idpersonas);
                             response.sendRedirect("PersonasServlet?msg=Persona exiliada exitosamente");
                         } catch (SQLException e) {
                             response.sendRedirect("PersonasServlet?err=Error al exiliar a la persona");

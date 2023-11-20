@@ -7,6 +7,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Login.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/includes/footer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/includes" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/includes/navbar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/includes" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/personas/GestionPersonas.jsp" value="file://$PROJECT_DIR$/src/main/webapp/personas" />
       </map>
     </option>
   </component>
