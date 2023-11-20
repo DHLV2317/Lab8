@@ -45,7 +45,6 @@ public class PersonasServlet extends HttpServlet {
                         } catch (NumberFormatException ex) {
                             response.sendRedirect("PersonasServlet");
                         }
-
                         Personas per = personaDao.obtenerPersona(idpersonas);
 
                         if (per != null) {
