@@ -138,6 +138,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
+-- -----------------------------------------------------
+-- Table `rootsgame`.`lista_negra`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`lista_negra` (
+  `idlista_negra` INT NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `usuario_credenciales_id_usuario` INT NOT NULL,
+  PRIMARY KEY (`idlista_negra`),
+  INDEX `fk_lista_negra_usuario_credenciales1_idx` (`usuario_credenciales_id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_lista_negra_usuario_credenciales1`
+    FOREIGN KEY (`usuario_credenciales_id_usuario`)
+    REFERENCES `rootsgame`.`usuario_credenciales` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
