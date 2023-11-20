@@ -28,29 +28,6 @@ public class UsuarioDao extends DaoBase {
 
     }
 
-    public boolean validarUsuarioPassword(String username, String password) {
-
-        String sql = "SELECT * FROM usuario_credenciales where username = ? and password = ?";
-
-        boolean exito = false;
-
-        try (Connection connection = getConection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    exito = true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return exito;
-    }
 
     public boolean validarUsuarioPasswordHashed(String username, String password) {
 

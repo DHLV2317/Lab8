@@ -1,3 +1,4 @@
+<%@ page import="com.example.lab8.Beans.Profesion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,7 +27,7 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="genero">Género</label>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="genero" id="genero">
+                    <select class="form-select form-select-sm"  name="genero" id="genero">
                         <option selected>-- Selecciona un género --</option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -36,12 +37,11 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="profesion">Profesión</label>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="profesion" id="profesion">
-                        <option selected>-- Selecciona una profesión --</option>
-                        <option value="granjero">Granjero</option>
-                        <option value="constructor">Constructor</option>
-                        <option value="soldado">Soldado</option>
-                        <option value="ninguna">Ninguna</option>
+                    <select class="form-select form-select-sm"  name="profesion" id="profesion">
+                        <% for (Profesion profesion : listaProfesiones) {%>
+                        <option value="<%=profesion.getProfesionId()%>"><%=profesion.getDescripcion()%>
+                        </option>
+                        <% }%>
                     </select>
                 </div>
 
