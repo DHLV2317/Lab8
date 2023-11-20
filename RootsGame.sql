@@ -15,36 +15,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema rootsgame
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `rootsgame` DEFAULT CHARACTER SET utf8 ;
-
--- -----------------------------------------------------
--- Table `rootsgame`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
-  `id_usuario` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `edad` INT NOT NULL,
-  `correo` VARCHAR(45) NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuario`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `rootsgame`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
-  `id_usuario` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `edad` INT NOT NULL,
-  `correo` VARCHAR(45) NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuario`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
 USE `rootsgame` ;
 
 -- -----------------------------------------------------
@@ -55,6 +25,21 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`estadocivilizacion` (
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idestadoCivilizacion`))
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `rootsgame`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rootsgame`.`usuario` (
+  `id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `edad` INT NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -99,10 +84,10 @@ CREATE TABLE IF NOT EXISTS `rootsgame`.`personas` (
   `idpersonas` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `genero` VARCHAR(45) NOT NULL,
-  `alimentacion` INT NOT NULL,
-  `moral` INT NOT NULL,
+  `alimentacion` VARCHAR(45) NOT NULL,
+  `moral` VARCHAR(45) NOT NULL,
   `tiempo` VARCHAR(45) NOT NULL,
-  `fuerza` VARCHAR(45) NULL,
+  `fuerza` VARCHAR(45) NOT NULL,
   `produccion` VARCHAR(45) NOT NULL,
   `profesion_idprofesion` INT NOT NULL,
   `civilizacion_idcivilizacion` INT NOT NULL,
