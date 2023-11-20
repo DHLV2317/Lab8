@@ -3,7 +3,7 @@
 <% String currentPage = request.getParameter("currentPage"); %>
 <jsp:useBean id="usuarioLogueado" scope="session" type="Usuario" class="com.example.lab8.Beans.Usuario" />
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-success">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>/PersonasServlet">Roots Game</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

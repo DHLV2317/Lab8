@@ -8,10 +8,11 @@
     <jsp:include page="../includes/headCss.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="../includes/navbar.jsp">
+    <jsp:param name="currentPage" value="per"/>
+</jsp:include>
 <div class='container'>
-    <jsp:include page="../includes/navbar.jsp">
-        <jsp:param name="currentPage" value="per"/>
-    </jsp:include>
+
     <div class="row mb-4">
         <div class="col-md-3"></div>
         <div class="col-md-6">
