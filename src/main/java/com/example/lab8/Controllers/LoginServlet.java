@@ -1,5 +1,6 @@
 package com.example.lab8.Controllers;
 
+import com.example.lab8.Beans.ListaNegra;
 import com.example.lab8.Beans.Usuario;
 import com.example.lab8.Beans.UsuarioCredenciales;
 import com.example.lab8.Daos.UsuarioDao;
@@ -86,9 +87,9 @@ public class LoginServlet extends HttpServlet {
         String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z\\d@#$%^&+=!]).{8,}$";
         return password.matches(passwordRegex);
     }
-
     public Usuario parseUsuario(HttpServletRequest request) {
         Usuario usuario = new Usuario();
+
         String nombre = request.getParameter("nombre");
         String username = request.getParameter("usuarioNuevo");
         String correo = request.getParameter("email");
@@ -103,6 +104,8 @@ public class LoginServlet extends HttpServlet {
             }
 
             if (edad <= 12) {
+                ListaNegra listaNegra = new ListaNegra();
+                listaNegra.setCorreo(correo);
                 throw new IllegalArgumentException("El usuario debe ser mayor de 12 años.");
             }
 
