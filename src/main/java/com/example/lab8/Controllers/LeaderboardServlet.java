@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "Leaderboard", value = "/Leaderboard")
+@WebServlet(name = "LeaderboardServlet", value = "/LeaderboardServlet")
 public class LeaderboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("Leaderboard.jsp").forward(request,response);
     }
 
     @Override

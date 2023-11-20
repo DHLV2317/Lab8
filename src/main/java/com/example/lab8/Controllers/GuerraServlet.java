@@ -10,7 +10,7 @@ import java.io.IOException;
 public class GuerraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("Guerra.jsp").forward(request,response);
     }
 
     @Override

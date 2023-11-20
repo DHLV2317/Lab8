@@ -5,7 +5,7 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<%=request.getContextPath()%>">Roots Game</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/PersonasServlet">Roots Game</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%=currentPage.equals("gue") ? "active" : ""%>"
+                    <a class="nav-link <%=currentPage.equals("war") ? "active" : ""%>"
                        href="<%=request.getContextPath()%>/GuerraServlet">
                         Guerra
                     </a>

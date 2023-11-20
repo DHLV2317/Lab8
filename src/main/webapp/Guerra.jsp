@@ -16,7 +16,7 @@
 <body>
 <div>
     <jsp:include page="includes/navbar.jsp">
-        <jsp:param name="currentPage" value="job"/>
+        <jsp:param name="currentPage" value="war"/>
     </jsp:include>
 </div>
 </body>

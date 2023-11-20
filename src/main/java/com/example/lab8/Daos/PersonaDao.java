@@ -57,21 +57,18 @@ public class PersonaDao extends DaoBase{
 
         }
     }
-    public ArrayList<Personas> listarPersonas(int limit, int offset){
+    public ArrayList<Personas> listarPersonas(){
 
         ArrayList<Personas> lista = new ArrayList<>();
         CivilizacionDao cDao = new CivilizacionDao();
         ProfesionDao prDao = new ProfesionDao();
 
 
-        String sql = "select * from personas p limit ? offset ?";
+        String sql = "select * from personas";
 
 
         try (Connection conn = getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1,limit);
-            pstmt.setInt(2,offset);
 
 
             try(ResultSet rs = pstmt.executeQuery()) {

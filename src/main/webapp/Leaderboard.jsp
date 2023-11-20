@@ -9,7 +9,7 @@
 <body>
 <div>
     <jsp:include page="includes/navbar.jsp">
-        <jsp:param name="currentPage" value="job"/>
+        <jsp:param name="currentPage" value="lead"/>
     </jsp:include>
 </div>
 </body>
