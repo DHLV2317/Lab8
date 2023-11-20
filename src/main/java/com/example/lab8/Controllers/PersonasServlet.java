@@ -1,8 +1,11 @@
 package com.example.lab8.Controllers;
 
 import com.example.lab8.Beans.Personas;
+import com.example.lab8.Beans.Profesion;
 import com.example.lab8.Beans.Usuario;
+import com.example.lab8.Daos.CivilizacionDao;
 import com.example.lab8.Daos.PersonaDao;
+import com.example.lab8.Daos.ProfesionDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -96,10 +99,24 @@ public class PersonasServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "guardar" : request.getParameter("action");
         PersonaDao personaDao = new PersonaDao();
+        ProfesionDao profesionDao = new ProfesionDao();
+        CivilizacionDao civilizacionDao = new CivilizacionDao();
 
         switch (action) {
-            case "guardar":
-                Personas p = new Personas();
+            case "crear":
+                Personas personaCreada = new Personas();
+                personaCreada.setNombre(request.getParameter("nombre"));
+                personaCreada.setGenero(request.getParameter("apellido"));
+                personaCreada.setProfesion(profesionDao.obtenerProfesion("4"));
+                personaCreada.setAlimentacion(Integer.parseInt(request.getParameter("50")));
+                personaCreada.setMoral(Integer.parseInt(request.getParameter("50")));
+                personaCreada.setTiempo(request.getParameter("tiempo"));
+                personaCreada.setProduccion(request.getParameter("produccion"));
+                personaCreada.setCivilizacion(civilizacionDao.obtenerCivilizacion("3")); // se le asigna el estado de pendiente (luego será revisado por el delegado general)
+
+                personaDao.crearPersona(personaCreada); //crear el alumno en la base de datos
+
+                response.sendRedirect(request.getContextPath() + "/PersonasServlet");
 
                 break;
 

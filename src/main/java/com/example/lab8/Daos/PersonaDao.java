@@ -95,5 +95,26 @@ public class PersonaDao extends DaoBase{
         }
         return lista;
     }
+    public void crearPersona(Personas persona){
 
+        String sql = "insert into personas (nombre, genero, profesion_idprofesion, alimentacion, moral, tiempo, fuerza, produccion, civilizacion_idcivilizacion) values (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,persona.getNombre());
+            pstmt.setString(2,persona.getGenero());
+            pstmt.setInt(3,persona.getProfesion().getProfesionId());
+            pstmt.setInt(4,persona.getAlimentacion());
+            pstmt.setInt(5,persona.getMoral());
+            pstmt.setString(6,persona.getTiempo());
+            pstmt.setString(7,persona.getProduccion());
+            pstmt.setInt(8,persona.getCivilizacion().getCivilizacionId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
